@@ -40,6 +40,9 @@ li {
 
 .space-list-items {
     margin-bottom: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .avatar {

@@ -4,7 +4,13 @@ var api = require('../utils/api');
 
 
 function SelectedLanguage(props) {
-    var languages = ['All', 'JavaScript', 'Ruby', 'JAVA', 'CSS', 'Python']
+    var languages = [
+        'All',
+        'HTML',
+        'CSS',
+        'JavaScript',
+        'Ruby',
+        'JAVA'];
     return (
         <ul className="languages">
             {languages.map(function (lang) {

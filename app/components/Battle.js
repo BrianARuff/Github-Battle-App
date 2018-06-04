@@ -1,33 +1,8 @@
 var React = require('react');
 var PropTypes = require('prop-types');
 var Link = require('react-router-dom').Link;
+var PlayerPreview = require('./PlayerPreview');
 
-function PlayerPreview(props) {
-    return(
-        <div>
-            <div className="column">
-                <img src={props.avatar}
-                     alt={`Avatar for ${props.username}`}
-                     className="avatar"
-                     onError={(e) => {e.target.src = 'https://github.com/error.png?size=200'}}
-                />
-                <h2 className="username">@{props.username}</h2>
-            </div>
-            <button
-                className="reset"
-                onClick={props.onReset.bind(null, props.id)}>
-                Reset
-            </button>
-        </div>
-    )
-}
-
-PlayerPreview.propTypes = {
-    avatar: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    onReset: PropTypes.func.isRequired,
-    id: PropTypes.string.isRequired,
-};
 
 class PlayerInput extends React.Component {
     constructor(props){
@@ -51,7 +26,10 @@ class PlayerInput extends React.Component {
 
     handleSubmit(e){
         e.preventDefault();
-        this.props.onSubmit(this.props.id, this.state.username)
+        this.props.onSubmit(
+            this.props.id,
+            this.state.username
+        )
     }
 
     render(){
@@ -64,14 +42,16 @@ class PlayerInput extends React.Component {
                     type="text"
                     id="username"
                     placeholder="Github Username"
-                    autoComplete="Off"
+                    autoComplete="off"
                     value={this.state.username}
                     onChange={this.handleChange}
                 />
                 <button
                     className="button"
                     type="submit"
-                    disabled={!this.state.username}>Submit</button>
+                    disabled={!this.state.username}>
+                    Submit
+                </button>
             </form>
         )
     }
@@ -117,7 +97,7 @@ class Battle extends React.Component {
 
     render(){
         var match = this.props.match;
-        var playerOneName=  this.state.playerOneName;
+        var playerOneName =  this.state.playerOneName;
         var playerTwoName = this.state.playerTwoName;
         var playerOneImage = this.state.playerOneImage;
         var playerTwoImage = this.state.playerTwoImage;
@@ -135,9 +115,14 @@ class Battle extends React.Component {
                         <PlayerPreview
                             avatar={playerOneImage}
                             username={playerOneName}
-                            onReset={this.handleReset}
-                            id="playerOne"
-                        />}
+                        >
+                            <button
+                                className="reset"
+                                onClick={this.handleReset.bind(null, "playerOne")}>
+                                Reset
+                            </button>
+                        </PlayerPreview>}
+
                     {!playerTwoName &&
                     <PlayerInput
                         id="playerTwo"
@@ -148,9 +133,13 @@ class Battle extends React.Component {
                     <PlayerPreview
                         avatar={playerTwoImage}
                         username={playerTwoName}
-                        onReset={this.handleReset}
-                        id="playerTwo"
-                    />}
+                    >
+                        <button
+                            className="reset"
+                            onClick={this.handleReset.bind(null, "playerTwo")}>
+                            Reset
+                        </button>
+                    </PlayerPreview>}
                 </div>
                 { playerOneImage && playerTwoImage &&
                     <Link
