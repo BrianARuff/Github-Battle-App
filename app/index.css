@@ -1,6 +1,7 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, SegoeUI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica, Neue, sans-serif;
     background: #e6e6e6;
+    margin:3rem;
 }
 
 ul {
